@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -571,7 +571,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6365708019365175187, guid: 444e63ed7e784154184e4accc2d2ec25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2129419671}
   m_SourcePrefab: {fileID: 100100000, guid: 444e63ed7e784154184e4accc2d2ec25, type: 3}
 --- !u!1 &888644471
 GameObject:
@@ -1048,6 +1051,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allFish: []
   fish: {fileID: 6365708019365175187, guid: 444e63ed7e784154184e4accc2d2ec25, type: 3}
+  radius: 0
+  boundary: 10
 --- !u!4 &1435142572
 Transform:
   m_ObjectHideFlags: 0
@@ -1107,6 +1112,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2129419663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6365708019365175187, guid: 444e63ed7e784154184e4accc2d2ec25, type: 3}
+  m_PrefabInstance: {fileID: 857241156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2129419671
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129419663}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
