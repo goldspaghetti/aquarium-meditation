@@ -79,6 +79,10 @@ public class Fish : MonoBehaviour
         else{
             selfRigidbody.AddRelativeForce(Vector3.left * forceScaling, ForceMode.Force);
         }
+
+        // move to point
+        
+
         // Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);
         if (name == "FishV1"){
             // Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);

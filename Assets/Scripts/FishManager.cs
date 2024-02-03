@@ -31,6 +31,7 @@ public class FishManager : MonoBehaviour
     public bool a = false;
     public bool b = false;
     public bool c = false;
+    public bool d = false;
     void Start()
     {
         GenerateFish();
@@ -155,28 +156,36 @@ public class FishManager : MonoBehaviour
             
         // }
 
-        if (Time.time >= 10 && !a){
-            Debug.Log("INHALE");
-            a = true;
-            fishTankTorque = 1f;
-            innerFishTankTorque = 0f;
-            // inhale(1, 1, 0.5f);
-        }
-        if (Time.time >= 15 && !b){
-            Debug.Log("Exhale");
-            b = true;
-            fishTankTorque = 0f;
-            innerFishTankTorque = 1f;
-            // inhale(2, 0.5f, 1f);
-        }
-        if (Time.time >= 20 && !c){
-            Debug.Log("INHALE");
-            c = true;
-            fishTankTorque = 0.1f;
-            innerFishTankTorque = 0.1f;
+        // if (Time.time >= 10 && !a){
+        //     Debug.Log("INHALE");
+        //     a = true;
+        //     fishTankTorque = 0.5f;
+        //     innerFishTankTorque = 0f;
+        //     // inhale(1, 1, 0.5f);
+        // }
+        // if (Time.time >= 15 && !b){
+        //     Debug.Log("hold");
+        //     b = true;
+        //     fishTankTorque = 0.1f;
+        //     innerFishTankTorque = 1f;
+        //     // inhale(2, 0.5f, 1f);
+        // }
+        // if (Time.time >= 20 && !c){
+        //     Debug.Log("exhale");
+        //     c = true;
+        //     fishTankTorque = 0.0f;
+        //     innerFishTankTorque = 0.5f;
             
-            // inhale(2, 0.5f, 1f);
-        }
+        //     // inhale(2, 0.5f, 1f);
+        // }
+        // if (Time.time >= 25 && !d){
+        //     Debug.Log("INHALE");
+        //     d = true;
+        //     fishTankTorque = 0.1f;
+        //     innerFishTankTorque = 0.1f;
+            
+        //     // inhale(2, 0.5f, 1f);
+        // }
 
 
         // if (currInhale){

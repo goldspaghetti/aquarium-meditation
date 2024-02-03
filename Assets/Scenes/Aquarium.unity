@@ -1297,7 +1297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allFish: []
   fish: {fileID: 6365708019365175187, guid: 444e63ed7e784154184e4accc2d2ec25, type: 3}
-  boundary: 10
+  boundary: 9
   startInhale: 0
   inhaleDur: 0
   inhaleEnd: 0
@@ -1317,6 +1317,7 @@ MonoBehaviour:
   a: 0
   b: 0
   c: 0
+  d: 0
 --- !u!4 &1435142572
 Transform:
   m_ObjectHideFlags: 0
