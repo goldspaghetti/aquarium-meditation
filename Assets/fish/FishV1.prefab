@@ -102,10 +102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfRigidbody: {fileID: 2803213925096999673}
   targetVelocity: {x: 0, y: 0, z: 0}
-  torqueMax: 1
-  forceMax: 1
-  forceScaling: 1
+  torqueScaling: 1
+  forceScaling: 2
   startVelMag: 1
+  tankRadius: 50
+  maxTankTorqueMag: 10
+  targetDir: {x: 0, y: 0, z: 0}
+  useTargetDir: 0
+  updateClock: 20
+  updateClockDur: 20
 --- !u!54 &2803213925096999673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -115,7 +120,7 @@ Rigidbody:
   m_GameObject: {fileID: 6365708019365175187}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 2
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

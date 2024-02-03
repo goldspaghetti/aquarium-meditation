@@ -12,17 +12,24 @@ public class Fish : MonoBehaviour
     public ArrayList nearbyFish = new ArrayList();
     public Rigidbody selfRigidbody;
     public Vector3 targetVelocity;
-    public float torqueMax = 1;
-    public float forceMax = 1;
+    public float torqueScaling = 1f;
     public float forceScaling = 0.01f;
     public float startVelMag = 1;
     bool start = true;
+    public float tankRadius = 20;
+    public float maxTankTorqueMag = 10;
+    public Vector3 targetDir;
+    public bool useTargetDir;
+    // public GameObject cube;
+    public int updateClock = 20;
+    public int updateClockDur = 200;
     void Start()
     {
         // if (this.name == "FishV1"){
         //     Vector3 a = new Vector3(1F, 0, 0);
         //     this.selfRigidbody.AddForce(a, ForceMode.VelocityChange);
         // }
+        
     }
 
     // void FixedUpdate(){
@@ -46,31 +53,84 @@ public class Fish : MonoBehaviour
 
         if (start){
             start=false;
-            selfRigidbody.AddRelativeForce(Vector3.left * startVelMag, ForceMode.VelocityChange);
+            // selfRigidbody.AddRelativeForce(Vector3.left * startVelMag, ForceMode.VelocityChange);
+            selfRigidbody.AddRelativeForce(Vector3.left*startVelMag, ForceMode.VelocityChange);
         }
         else if (nearbyFish.Count > 0){
-        float forceMag = this.selfRigidbody.velocity.magnitude;
-        // Quaternion torque = this.transform.localRotation;
-        Vector3 torqueDir = new Vector3(0, 0, 0);
-        foreach (Rigidbody rigidbody in this.nearbyFish){
-            forceMag += rigidbody.velocity.magnitude;
-            Quaternion rotDiff = rigidbody.transform.localRotation* Quaternion.Inverse(this.transform.localRotation);
-            // this.transform.localRotation * Quaternion.Inverse(rigidbody.transform.localRotation);
-            torqueDir += new Vector3(rotDiff.x, rotDiff.y, rotDiff.z);
-        }
-        torqueDir /= this.nearbyFish.Count;
-        selfRigidbody.AddTorque(torqueDir, ForceMode.Force);
-        forceMag /= (this.nearbyFish.Count+1);
-        selfRigidbody.AddRelativeForce(Vector3.left * forceMag*forceScaling, ForceMode.Force);
-        //and to a torque, depending on the sum of orientation differences.
+            float forceMag = this.selfRigidbody.velocity.magnitude;
+            // Quaternion torque = this.transform.localRotation;
+            Vector3 torqueDir = new Vector3(0, 0, 0);
+            foreach (Rigidbody rigidbody in this.nearbyFish){
+                forceMag += rigidbody.velocity.magnitude;
+                Quaternion rotDiff = rigidbody.transform.localRotation* Quaternion.Inverse(this.transform.localRotation);
+                // this.transform.localRotation * Quaternion.Inverse(rigidbody.transform.localRotation);
+                torqueDir += new Vector3(rotDiff.x, rotDiff.y, rotDiff.z);
+            }
+            torqueDir /= this.nearbyFish.Count;
+            selfRigidbody.AddTorque(torqueDir*torqueScaling, ForceMode.Force);
+            forceMag /= (this.nearbyFish.Count+1);
+            selfRigidbody.AddRelativeForce(Vector3.left * forceMag*forceScaling, ForceMode.Force);
+            //and to a torque, depending on the sum of orientation differences.
+
+            
         }
         else{
             selfRigidbody.AddRelativeForce(Vector3.left * forceScaling, ForceMode.Force);
         }
         
         if (name == "FishV1"){
-            Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);
+            // Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);
+            // Debug.Log("local rotation: " + transform.localRotation);
+            // Debug.Log("rotation: " + transform.rotation);
+            // transform.position;
         }
+
+        Vector3 tankTorque = Vector3.Cross(selfRigidbody.velocity, transform.position);
+        Vector3 newTorque = Vector3.Normalize(tankTorque);
+        if (tankRadius-transform.position.magnitude == 0){
+            
+        }
+        else{
+            newTorque/= tankRadius-transform.position.magnitude;
+            newTorque *= -0.1f;
+        }
+        if (Vector3.Angle(selfRigidbody.velocity, transform.position) < 90){
+            selfRigidbody.AddTorque(newTorque*torqueScaling, ForceMode.VelocityChange);
+        }
+        updateClock -= 1;
+        if (updateClock <= 0){
+            Vector3 randTorque = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
+            selfRigidbody.AddTorque(randTorque*torqueScaling, ForceMode.Force);
+            float randForce = Random.Range(-10f, 10f);
+            selfRigidbody.AddRelativeForce(Vector3.left * randForce*forceScaling, ForceMode.Force);
+            updateClock = updateClockDur;
+        }
+        // selfRigidbody.AddTorque(tankTorque, ForceMode.VelocityChange);
+
+
+        // Vector3 tankTorque = Vector3.Cross(selfRigidbody.velocity, transform.position);
+        // float tankTorqueMag = 0;
+        // if (transform.position.magnitude >= tankRadius){
+        //     tankTorqueMag = maxTankTorqueMag;
+        //     if (Vector3.Angle(selfRigidbody.velocity, transform.position) == 0){
+        //         Debug.Log("0!!");
+        //         tankTorque = UnityEngine.Random.insideUnitSphere;
+        //     }
+        //     else if (Vector3.Angle(selfRigidbody.velocity, transform.position) > 90){
+        //         Debug.Log(">90!!");
+        //         tankTorqueMag = 0;
+        //     }
+        // }
+        // tankTorque *= tankTorqueMag;
+        // selfRigidbody.AddTorque(tankTorque, ForceMode.Force);
+        // // transform.rotation
+        // if (name == "FishV1"){
+        //     Debug.Log("tank torque: " + tankTorque);
+        //     Debug.Log("distance: " + transform.position.magnitude);
+        // }
+
+
+
     }
     /*
     void FixedUpdate(){
@@ -123,10 +183,10 @@ public class Fish : MonoBehaviour
     */
 
     // Update is called once per frame
-    void Update()
-    {
+    // void Update()
+    // {
 
-    }
+    // }
     void OnTriggerEnter(Collider collider){
         if (collider.name != "FishTank"){
             if (name == "FishV1"){
