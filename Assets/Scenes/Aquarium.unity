@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -918,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 904210146}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1049,11 +1049,6 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   torqueScaling: 1
   forceScaling: 0.1
-  startVelMag: 1
-  tankRadius: 20
-  maxTankTorqueMag: 10
-  targetDir: {x: 0, y: 0, z: 0}
-  useTargetDir: 0
   updateClock: 20
   updateClockDur: 20
 --- !u!4 &1066595403 stripped
@@ -1078,7 +1073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1094534669
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -1313,8 +1308,15 @@ MonoBehaviour:
   exhaleDur: 0
   currExhale: 0
   exhaleEnd: 0
+  startVelMag: 1
+  fishTankTorque: 0.1
+  innerFishTankTorque: 0.1
+  tankRadius: 30
+  innerTankRadius: 0
+  maxTorque: 1
   a: 0
   b: 0
+  c: 0
 --- !u!4 &1435142572
 Transform:
   m_ObjectHideFlags: 0
@@ -1348,7 +1350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1607509240
 CapsuleCollider:
   m_ObjectHideFlags: 0

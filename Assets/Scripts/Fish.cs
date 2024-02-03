@@ -14,16 +14,14 @@ public class Fish : MonoBehaviour
     public Vector3 targetVelocity;
     public float torqueScaling = 1f;
     public float forceScaling = 0.01f;
-    public float startVelMag = 1;
+    // public float startVelMag = 1;
     bool start = true;
-    public float tankRadius = 20;
-    // public float maxTankTorqueMag = 10;
-    // public Vector3 targetDir;
-    // public bool useTargetDir;
-    // public GameObject cube;
+    // public float tankRadius = 20;
+    // public float innerTankRadius = 10;
     public int updateClock = 20;
     public int updateClockDur = 200;
-    public float fishTankTorque = 0.1f;
+    // public float fishTankTorque = 0.1f;
+    // public float innerFishTankTorque = 0.1f;
     void Start()
     {
         // if (this.name == "FishV1"){
@@ -52,10 +50,13 @@ public class Fish : MonoBehaviour
 
         // using vector3 left since model is offset :(
 
+        // if (start){
+        //     start=false;
+        //     // selfRigidbody.AddRelativeForce(Vector3.left * startVelMag, ForceMode.VelocityChange);
+        //     selfRigidbody.AddRelativeForce(Vector3.left*startVelMag, ForceMode.VelocityChange);
+        // }
         if (start){
             start=false;
-            // selfRigidbody.AddRelativeForce(Vector3.left * startVelMag, ForceMode.VelocityChange);
-            selfRigidbody.AddRelativeForce(Vector3.left*startVelMag, ForceMode.VelocityChange);
         }
         else if (nearbyFish.Count > 0){
             float forceMag = this.selfRigidbody.velocity.magnitude;
@@ -78,7 +79,7 @@ public class Fish : MonoBehaviour
         else{
             selfRigidbody.AddRelativeForce(Vector3.left * forceScaling, ForceMode.Force);
         }
-        
+        // Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);
         if (name == "FishV1"){
             // Debug.Log("current velocity: " + selfRigidbody.velocity.magnitude);
             // Debug.Log("local rotation: " + transform.localRotation);
@@ -86,22 +87,40 @@ public class Fish : MonoBehaviour
             // transform.position;
         }
 
-        Vector3 tankTorque = Vector3.Cross(selfRigidbody.velocity, transform.position);
-        Vector3 newTorque = Vector3.Normalize(tankTorque);
-        if (tankRadius-transform.position.magnitude == 0){
+
+        // outer tank
+        // Vector3 tankTorque = Vector3.Cross(selfRigidbody.velocity, transform.position);
+        // Vector3 newTorque = Vector3.Normalize(tankTorque);
+        // if (tankRadius-transform.position.magnitude == 0){
             
-        }
-        else{
-            newTorque/= tankRadius-transform.position.magnitude;
-            newTorque *= -1*fishTankTorque;
-        }
-        if (Vector3.Angle(selfRigidbody.velocity, transform.position) < 90){
-            selfRigidbody.AddTorque(newTorque*torqueScaling, ForceMode.VelocityChange);
-        }
+        // }   
+        // else{
+        //     newTorque/= tankRadius-transform.position.magnitude;
+        //     newTorque *= -1*fishTankTorque;
+        // }
+        // if (Vector3.Angle(selfRigidbody.velocity, transform.position) < 90){
+        //     selfRigidbody.AddTorque(newTorque*torqueScaling, ForceMode.VelocityChange);
+        // }
+
+        // inner sphere
+        // Vector3 innerTankTorque = Vector3.Cross(selfRigidbody.velocity, transform.position);
+        // Vector3 newInnerTorque = Vector3.Normalize(innerTankTorque);
+        // if (innerTankRadius-transform.position.magnitude == 0){
+            
+        // }   
+        // else{
+        //     newInnerTorque/= transform.position.magnitude-innerTankRadius;
+        //     newInnerTorque *= -1*innerFishTankTorque;
+        // }
+        // if (Vector3.Angle(selfRigidbody.velocity, transform.position) > 90){
+        //     selfRigidbody.AddTorque(newInnerTorque*torqueScaling, ForceMode.VelocityChange);
+        // }
+
+
         updateClock -= 1;
         if (updateClock <= 0){
             Vector3 randTorque = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
-            selfRigidbody.AddTorque(randTorque*torqueScaling, ForceMode.Force);
+            // selfRigidbody.AddTorque(randTorque*torqueScaling, ForceMode.Force);
             float randForce = Random.Range(-10f, 10f);
             selfRigidbody.AddRelativeForce(Vector3.left * randForce*forceScaling, ForceMode.Force);
             updateClock = updateClockDur;
