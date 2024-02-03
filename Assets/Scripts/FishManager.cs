@@ -23,6 +23,7 @@ public class FishManager : MonoBehaviour
     
     public bool a = false;
     public bool b = false;
+    public bool c = false;
     void Start()
     {
         GenerateFish();
@@ -74,12 +75,26 @@ public class FishManager : MonoBehaviour
         if (Time.time >= 10 && !a){
             Debug.Log("INHALE");
             a = true;
-            inhale(1, 1, 0.5f);
+            foreach (Fish fish in allFish){
+                fish.fishTankTorque = 1f;
+            }
+            // inhale(1, 1, 0.5f);
         }
-        if (Time.time >= 11 && !b){
+        if (Time.time >= 15 && !b){
             Debug.Log("INHALE");
             b = true;
-            inhale(2, 0.5f, 1f);
+            foreach (Fish fish in allFish){
+                fish.fishTankTorque = -1f;
+            }
+            // inhale(2, 0.5f, 1f);
+        }
+        if (Time.time >= 20 && !c){
+            Debug.Log("INHALE");
+            c = true;
+            foreach (Fish fish in allFish){
+                fish.fishTankTorque = 0.1f;
+            }
+            // inhale(2, 0.5f, 1f);
         }
 
 

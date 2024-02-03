@@ -17,12 +17,13 @@ public class Fish : MonoBehaviour
     public float startVelMag = 1;
     bool start = true;
     public float tankRadius = 20;
-    public float maxTankTorqueMag = 10;
-    public Vector3 targetDir;
-    public bool useTargetDir;
+    // public float maxTankTorqueMag = 10;
+    // public Vector3 targetDir;
+    // public bool useTargetDir;
     // public GameObject cube;
     public int updateClock = 20;
     public int updateClockDur = 200;
+    public float fishTankTorque = 0.1f;
     void Start()
     {
         // if (this.name == "FishV1"){
@@ -92,7 +93,7 @@ public class Fish : MonoBehaviour
         }
         else{
             newTorque/= tankRadius-transform.position.magnitude;
-            newTorque *= -0.1f;
+            newTorque *= -1*fishTankTorque;
         }
         if (Vector3.Angle(selfRigidbody.velocity, transform.position) < 90){
             selfRigidbody.AddTorque(newTorque*torqueScaling, ForceMode.VelocityChange);
