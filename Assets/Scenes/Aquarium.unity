@@ -1051,6 +1051,8 @@ MonoBehaviour:
   forceScaling: 0.1
   updateClock: 20
   updateClockDur: 20
+  targetPoint: {x: 0, y: 0, z: 0}
+  goToPoint: 0
 --- !u!4 &1066595403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38f74cd884cda8242b4fdc167c4962f8, type: 3}
@@ -1073,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1094534669
 TerrainCollider:
   m_ObjectHideFlags: 0

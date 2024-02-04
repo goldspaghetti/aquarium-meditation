@@ -34,9 +34,8 @@ public class FishManager : MonoBehaviour
     public bool d = false;
     void Start()
     {
-        GenerateFish();
-        // GenerateSingleFish();
-
+        // GenerateFish();
+        GenerateSingleFish();
         foreach (GameObject fishGameObject in GameObject.FindGameObjectsWithTag("fish")){
             allFish.Add(fishGameObject.GetComponent<Fish>());
             Debug.Log("found fish: " + fishGameObject.name);
@@ -44,6 +43,9 @@ public class FishManager : MonoBehaviour
 
         foreach (Fish fish in allFish){
             fish.selfRigidbody.AddRelativeForce(Vector3.left*startVelMag, ForceMode.VelocityChange);
+            fish.goToPoint = true;
+            fish.targetPoint = new Vector3(5, 5, 0);
+            fish.selfRigidbody.AddRelativeForce(-1*fish.selfRigidbody.velocity, ForceMode.VelocityChange);
         }
         // Time.fixedDeltaTime = 0.2f;
         // foreach (Fish fish in allFish){
@@ -59,6 +61,7 @@ public class FishManager : MonoBehaviour
     void FixedUpdate(){
 
         foreach (Fish fish in allFish){
+            if (!fish.goToPoint){
             // outer tank
             Vector3 tankTorque = Vector3.Cross(fish.selfRigidbody.velocity, fish.transform.position);
             Vector3 newTorque = Vector3.Normalize(tankTorque);
@@ -124,6 +127,7 @@ public class FishManager : MonoBehaviour
                 fish.selfRigidbody.AddTorque(newInnerTorque*fish.torqueScaling, ForceMode.VelocityChange);
             }
             // fish.selfRigidbody.AddTorque(newInnerTorque*fish.torqueScaling, ForceMode.VelocityChange);
+            }
         }
 
 
@@ -226,7 +230,7 @@ public class FishManager : MonoBehaviour
     }
 
     void GenerateSingleFish(){
-        Instantiate(fish, new Vector3(20, 0, 0), Quaternion.Euler(0, 180, 0));
+        Instantiate(fish, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
     }
 
     void GenerateFish(){
